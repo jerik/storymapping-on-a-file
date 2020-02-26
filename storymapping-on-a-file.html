@@ -377,6 +377,23 @@ if (db != null)
 <script>
 document.getElementById("newNoteButton").disabled = !db;
 </script>
+<input type='file' accept='text/*' onchange='openFile(event)'><br>
+<input id='output'></input>
+<script>
+	  var openFile = function(event) {
+			  var input = event.target;
+
+			  var reader = new FileReader();
+			  reader.onload = function(){
+						var dataURL = reader.result;
+						var output = document.getElementById('output');
+						output.value = dataURL;
+					  };
+		  		// https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+			  // reader.readAsDataURL(input.files[0]);
+			  reader.readAsText(input.files[0]);
+			};
+</script>
 </body>
 </html>
 
