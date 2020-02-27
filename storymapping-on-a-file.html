@@ -1,8 +1,7 @@
-
 <!doctype html>
-<html manifest="StickyNotes.manifest">
+<html>
 <head>
-<title>WebKit HTML 5 SQL Storage Notes Demo</title>
+<title>Story mapping on a file</title>
 <style>
 body {
     font-family: 'Lucida Grande', 'Helvetica', sans-serif;
@@ -10,7 +9,7 @@ body {
 
 .note {
     background-color: rgb(255, 240, 70);
-    height: 250px;
+    height: 200px;
     padding: 10px;
     position: absolute;
     width: 200px;
@@ -346,23 +345,22 @@ function newNote()
     note.saveAsNew();
 }
 
+function markup(message) {
+	return '<b>' + message + '</b>'
+}
+
 function newNoteFromListItem(message) {
 	/* bad style: copy paste... */
     var note = new Note();
     note.id = ++highestId;
+	/* note.text = markup(message); */
 	note.text = message;
     note.timestamp = new Date().getTime();
     note.left = Math.round(Math.random() * 400) + 'px';
     note.top = Math.round(Math.random() * 500) + 'px';
     note.zIndex = ++highestZ;
     note.saveAsNew();
-	console.log(note.text) ;
-}
-
-function testListCreation() {
-	let stories = ['Es war einmal', 'eine lange Geschichte', 'und wenn sie nicht gestorben sind', 'dann leben Sie noch heute']; 
-
-	stories.forEach(newNoteFromListItem)
+	/* console.log(note.text) ; */
 }
 
 function storiesFromText(text_string) {
@@ -371,6 +369,60 @@ function storiesFromText(text_string) {
 	clean_stories.forEach(newNoteFromListItem)
 
 	/* console.log(stories) */
+}
+
+
+/* Works magically like I want... */ 
+// https://stackoverflow.com/a/18197341/1933185
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+
+/* TODO create real export, which stores position and zIndex for a recover */
+function exportNotesAsTextfile()
+{
+    db.transaction(function(tx) {
+        /* tx.executeSql("SELECT id, note, timestamp, left, top, zindex FROM WebKitStickyNotes", [], function(tx, result) { */
+        tx.executeSql("SELECT GROUP_CONCAT(note, '\n') as content FROM WebKitStickyNotes", [], function(tx, result) {
+			/* console.log(result.rows[0]) */
+			/* console.log(result.rows[0].content) */
+			text = result.rows[0].content;
+  			/* console.log(text); */
+			download('storymapping-export.txt', text);
+
+            /* for (var i = 0; i < result.rows.length; ++i) { */
+            /*     var row = result.rows.item(i); */
+            /*     var note = new Note(); */
+            /*     note.id = row['id']; */
+            /*     note.text = row['note']; */
+            /*     note.timestamp = row['timestamp']; */
+            /*     note.left = row['left']; */
+            /*     note.top = row['top']; */
+            /*     note.zIndex = row['zindex']; */
+
+            /*     if (row['id'] > highestId) */
+            /*         highestId = row['id']; */
+            /*     if (row['zindex'] > highestZ) */
+            /*         highestZ = row['zindex']; */
+            /* } */
+
+            // if (!result.rows.length)
+               // newNote(); // erstellt glaube ich leer Notiz, wenn Kein element vorhanden ist
+        }, function(tx, error) {
+            alert('Failed to retrieve notes from database - ' + error.message);
+            return;
+        });
+    });
 }
 
 var openFile = function(event) {
@@ -382,6 +434,7 @@ var openFile = function(event) {
 				/* console.log(textfile) */
 				/* console.log(typeof(textfile)) */
 				storiesFromText(text)
+				console.log(reader)
 			  };
 		// https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
 	  // reader.readAsDataURL(input.files[0]);
@@ -413,6 +466,7 @@ if (db != null)
 document.getElementById("newNoteButton").disabled = !db;
 </script>
 <input type='file' accept='text/*' onchange='openFile(event)'><br>
+<button id="fileExport" onclick="exportNotesAsTextfile()">Export</button>
 </body>
 </html>
 
