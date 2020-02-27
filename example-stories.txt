@@ -1,0 +1,6 @@
+take coffee box
+fill coffee into coffee machine
+fill water into coffee machine
+start brewing process
+fill brewed coffee into your cup
+enjoy coffee
