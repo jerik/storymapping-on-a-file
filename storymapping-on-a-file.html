@@ -367,7 +367,8 @@ function testListCreation() {
 
 function storiesFromText(text_string) {
 	var stories = text_string.split(/[\r\n]+/)
-	stories.forEach(newNoteFromListItem)
+	var clean_stories = stories.filter(Boolean)
+	clean_stories.forEach(newNoteFromListItem)
 
 	/* console.log(stories) */
 }
@@ -387,6 +388,19 @@ var openFile = function(event) {
 	  reader.readAsText(input.files[0]);
 };
 
+function cleared()
+{
+    db.transaction(function(tx) {
+        tx.executeSql("DELETE FROM WebkitStickyNotes", [], function(result) {
+            loadNotes();
+        }, function(tx, error) {
+            tx.executeSql("CREATE TABLE WebKitStickyNotes (id REAL UNIQUE, note TEXT, timestamp REAL, left TEXT, top TEXT, zindex REAL)", [], function(result) { 
+                loadNotes(); 
+            });
+        });
+    });
+}
+
 if (db != null)
     addEventListener('load', loaded, false);
 </script>
@@ -394,6 +408,7 @@ if (db != null)
 <body>
 <p><h3>Story mapping on a file<h3></p>
 <button id="newNoteButton" onclick="newNote()">New Note</button>
+<button id="clearNoteButton" onclick="cleared()">Clear</button>
 <script>
 document.getElementById("newNoteButton").disabled = !db;
 </script>
