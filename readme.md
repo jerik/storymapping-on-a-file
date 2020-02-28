@@ -13,7 +13,7 @@ I search for a way to make the story mapping digital plus get rid of the manual 
 This project is based on: https://webkit.org/demos/sticky-notes/ and currently **only supports the Google Chrome browser.**
 
 ## Convention 
-This tool should always be only one single file which must work offline.  
+This tool should always be only one single file which must work offline. Javascript libraries should be avoided to keep it small and simple. 
 - Just download and start (adding notes or import a [textfile](https://raw.githubusercontent.com/jerik/storymapping-on-a-file/master/example-stories.txt) with stories)
 - No worries regarding business compliance
 - No worries regarding (technical) dependencies *(if you use Google Chrome)*
