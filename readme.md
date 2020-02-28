@@ -14,7 +14,7 @@ This project is based on: https://webkit.org/demos/sticky-notes/ and currently *
 
 ## Convention 
 This tool should always be only one single file which must work offline.  
-- Just download and start (adding notes or import a [textfile](example-stories.txt) with stories)
+- Just download and start (adding notes or import a [textfile](https://raw.githubusercontent.com/jerik/storymapping-on-a-file/master/example-stories.txt) with stories)
 - No worries regarding business compliance
 - No worries regarding (technical) dependencies *(if you use Google Chrome)*
 
