@@ -8,15 +8,15 @@ stories, bugs, etc. To get an overview I used to do story mapping with post-it n
 wall is available :(. Furthermore, at some point, you have to transfer your real-world post-it notes to jira-tickets. This is in some way bothersome. 
 
 I search for a way to make the story mapping digital plus get rid of the manual typewriting to get jira-tickets. And
-  here we are :) 
+  here we are :). Have a look *(with Google Chrome)* at [storymapping-on-a-file.html](https://jerik.github.io/storymapping-on-a-file/storymapping-on-a-file.html)
 
 This project is based on: https://webkit.org/demos/sticky-notes/ and currently **only supports the Google Chrome browser.**
 
 ## Convention 
 This tool should always be only one single file which must work offline.  
-- Just download and start.
+- Just download and start (adding notes or import a [textfile](example-stories.txt) with stories)
 - No worries regarding business compliance
-- No worries regarding (technical) dependencies
+- No worries regarding (technical) dependencies # if you use google chrome
 
 ## Change log
 ### 2020-02-28
