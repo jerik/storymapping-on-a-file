@@ -7,6 +7,10 @@ Supported browser: Google Chrome
 # Todo
 - Real Export that keep position, zindex, etc
 - Real Import that retsotre positino, zindex, etc
-- Change colors of sticky notes
-- Select sticky notes and change colors of selected
+- Change colors of sticky notes (directly on note)
+- Select sticky notes and change colors of selected (directly on all selected)
 - Use Key 'c' to create new note
+- Extend work sureface as well to the left und top; Always 3x a note space available in all directions
+- Select notes with drawing a rectangle (vs. select with shift?)
+- new Note should be available always, independet where I am on the work sureface
+- Duplicate a selected note (with shhortcut: Strg + D)
