@@ -20,15 +20,15 @@ This tool should always be only one single file which must work offline.
 
 ## Change log
 ### 2020-02-28
-- Added key shortcut 'Numpad add' to create a new note in the current browser view
+- Create a new note with hitting 'Numpad add' 
 
 # Todo
-1. Additional export to a file that keeps position, zindex, etc. Still in a human readable form.
-1. Additional Import that restores position, zindex, etc.
-1. Select several notes in a easy way, e.g. drag a rectangle with the mouse over the desired notes. or select with click + keydown shift?
-1. Change colors of notes (shall work on one note or on all selected notes). 
-1. Extend work sureface the left und top. At least 2x of a note space shall be available in all directions
-1. Top bar with the buttons should be available always, independet where I am on the work sureface
-1. Duplicate/clone a selected note (perhaps with a shortcut, e.g. Ctrl + d)
+1. Additional export to a file that keeps position, zindex, etc. Still in a human readable form
+1. Additional import of a file that restores position, zindex, etc
+1. Select several notes in a easy way, e.g. drag a rectangle with the mouse over the desired notes. or select with shift + click ...
+1. Change colors of notes (shall work on one note or on all selected notes)
+1. Extend work sureface on the left und top. At least the space of a note shall be available in all directions
+1. Top bar with the buttons (New Note, Clear, ...) shall be available always, independet where I am on the work sureface (e.g. I have scrolled to the left and down)
+1. Duplicate/clone a selected note (perhaps with a keyboard shortcut, e.g. Ctrl + d)
 1. DB shall be created file-specific. Otherwise does two different html pages query the same databse... 
 1. newNote should be created near arround the mouse-pointer
