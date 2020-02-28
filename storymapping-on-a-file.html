@@ -346,7 +346,7 @@ function newNote()
     var note = new Note();
     note.id = ++highestId;
     note.timestamp = new Date().getTime();
-    note.left = Math.round(Math.random() * 400) + 'px';
+    note.left = Math.round(Math.random() * 400) + window.pageXOffset + 'px';
     /* note.top = Math.round(Math.random() * 500) + 'px'; */
     note.top = Math.round(Math.random() * 500) + window.pageYOffset + 'px';
     note.zIndex = ++highestZ;
