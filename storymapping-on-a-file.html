@@ -7,6 +7,7 @@ body {
     font-family: 'Lucida Grande', 'Helvetica', sans-serif;
 }
 
+/* seems not to work... :( */
 #topbar {
   /* position: -webkit-sticky; /* Safari */
   /* position: sticky; */
@@ -67,10 +68,10 @@ try {
         if (!db)
             alert("Failed to open the database on disk.  This is probably because the version was bad or there is not enough space left in this domain's quota");
     } else
-        alert("Couldn't open the database.  Please try with a WebKit nightly with this feature enabled");
+        alert("Couldn't open the database. Please use Google Chrome.");
 } catch(err) {
     db = null;
-    alert("Couldn't open the database.  Please try with a WebKit nightly with this feature enabled");
+    alert("Couldn't open the database. Please use Google Chrome ");
 }
 
 var captured = null;
