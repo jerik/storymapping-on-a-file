@@ -7,6 +7,12 @@ body {
     font-family: 'Lucida Grande', 'Helvetica', sans-serif;
 }
 
+#topbar {
+  /* position: -webkit-sticky; /* Safari */
+  /* position: sticky; */
+  /* top: 0; */
+}
+
 .note {
     background-color: rgb(255, 240, 70);
     height: 200px;
@@ -341,7 +347,8 @@ function newNote()
     note.id = ++highestId;
     note.timestamp = new Date().getTime();
     note.left = Math.round(Math.random() * 400) + 'px';
-    note.top = Math.round(Math.random() * 500) + 'px';
+    /* note.top = Math.round(Math.random() * 500) + 'px'; */
+    note.top = Math.round(Math.random() * 500) + window.pageYOffset + 'px';
     note.zIndex = ++highestZ;
     note.saveAsNew();
 }
@@ -455,19 +462,28 @@ function cleared()
     });
 }
 
+/* Keyboard shortcut to create new note with Key: Numpad ADD */
+document.addEventListener('keydown', function(event){
+	if (event.code == "NumpadAdd") { 
+		newNote();
+	}
+} );
+
 if (db != null)
     addEventListener('load', loaded, false);
 </script>
 </head>
 <body>
-<p><b>Story mapping on a file</b> <i style="font-size:0.7em">Supports only google chrome</i></p>
-<button id="newNoteButton" onclick="newNote()">New Note</button>
-<button id="clearNoteButton" onclick="cleared()">Clear</button>
-<script>
-document.getElementById("newNoteButton").disabled = !db;
-</script>
-<input type='file' accept='text/*' onchange='openFile(event)'><br>
-<button id="fileExport" onclick="exportNotesAsTextfile()">Export</button>
+<div id="topbar">
+	<p><b>Story mapping on a file</b> <i style="font-size:0.7em">Supports only google chrome</i></p>
+	<button id="newNoteButton" onclick="newNote()">New Note</button>
+	<button id="clearNoteButton" onclick="cleared()">Clear</button>
+	<script>
+	document.getElementById("newNoteButton").disabled = !db;
+	</script>
+	<input type='file' accept='text/*' onchange='openFile(event)'><br>
+	<button id="fileExport" onclick="exportNotesAsTextfile()">Export</button>
+</div>
 </body>
 </html>
 
