@@ -28,6 +28,7 @@ or a [json-export-file](https://raw.githubusercontent.com/jerik/storymapping-on-
 - Additional export to a json file that keeps position, zindex, etc. 
 - Additional import of a json that restores position, zindex, etc
 - The import detects if it should import JSON or Text. Will import bullshit if the json is not the exported one.
+- Database name is derived from the filename. To avoid the two or more storymapping files uses the same database.
 
 # Todo
 1. Select several notes in a easy way, e.g. drag a rectangle with the mouse over the desired notes. or select with shift + click ...
@@ -35,7 +36,6 @@ or a [json-export-file](https://raw.githubusercontent.com/jerik/storymapping-on-
 1. Extend work sureface on the left und top. At least the space of a note shall be available in all directions
 1. Top bar with the buttons (New Note, Clear, ...) shall be available always, independet where I am on the work sureface (e.g. I have scrolled to the left and down)
 1. Duplicate/clone a selected note (perhaps with a keyboard shortcut, e.g. Ctrl + d)
-1. DB shall be created file-specific. Otherwise does two different html pages query the same databse... 
 1. newNote should be created near arround the mouse-pointer
 
 
