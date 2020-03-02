@@ -35,3 +35,8 @@ This tool should always be only one single file which must work offline. Javascr
 1. Duplicate/clone a selected note (perhaps with a keyboard shortcut, e.g. Ctrl + d)
 1. DB shall be created file-specific. Otherwise does two different html pages query the same databse... 
 1. newNote should be created near arround the mouse-pointer
+
+
+## Interessting
+- https://simonwep.github.io/selection/
+- https://alligator.io/js/drag-and-drop-vanilla-js/

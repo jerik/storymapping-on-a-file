@@ -397,36 +397,15 @@ function download(filename, text) {
 }
 
 
-/* TODO create real export, which stores position and zIndex for a recover */
-function exportNotesAsTextfile()
+function export_text()
 {
     db.transaction(function(tx) {
-        /* tx.executeSql("SELECT id, note, timestamp, left, top, zindex FROM WebKitStickyNotes", [], function(tx, result) { */
         tx.executeSql("SELECT GROUP_CONCAT(note, '\n') as content FROM WebKitStickyNotes", [], function(tx, result) {
 			/* console.log(result.rows[0]) */
 			/* console.log(result.rows[0].content) */
 			text = result.rows[0].content;
   			/* console.log(text); */
 			download('storymapping-export.txt', text);
-
-            /* for (var i = 0; i < result.rows.length; ++i) { */
-            /*     var row = result.rows.item(i); */
-            /*     var note = new Note(); */
-            /*     note.id = row['id']; */
-            /*     note.text = row['note']; */
-            /*     note.timestamp = row['timestamp']; */
-            /*     note.left = row['left']; */
-            /*     note.top = row['top']; */
-            /*     note.zIndex = row['zindex']; */
-
-            /*     if (row['id'] > highestId) */
-            /*         highestId = row['id']; */
-            /*     if (row['zindex'] > highestZ) */
-            /*         highestZ = row['zindex']; */
-            /* } */
-
-            // if (!result.rows.length)
-               // newNote(); // erstellt glaube ich leer Notiz, wenn Kein element vorhanden ist
         }, function(tx, error) {
             alert('Failed to retrieve notes from database - ' + error.message);
             return;
@@ -434,7 +413,7 @@ function exportNotesAsTextfile()
     });
 }
 
-function exportJson()
+function export_json()
 {
 	var stories_export = [];
     db.transaction(function(tx) {
@@ -523,8 +502,8 @@ if (db != null)
 	document.getElementById("newNoteButton").disabled = !db;
 	</script>
 	<input type='file' accept='text/*,application/json' onchange='openFile(event)'><br>
-	<!-- button id="fileExport" onclick="exportNotesAsTextfile()">Export</button-->
-	<button id="fileExport" onclick="exportJson()">Export</button>
+	<button id="fileExport" onclick="export_text()">Export Text</button>
+	<button id="fileExport" onclick="export_json()">Export Json</button>
 </div>
 </body>
 </html>
