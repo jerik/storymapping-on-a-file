@@ -22,9 +22,12 @@ This tool should always be only one single file which must work offline. Javascr
 ### 2020-02-28
 - Create a new note with hitting 'Numpad add' 
 
+### 2020-03-02 
+- Additional export to a json file that keeps position, zindex, etc. 
+- Additional import of a json that restores position, zindex, etc
+- The import detects if it should import JSON or Text. Will import bullshit if the json is not the exported one.
+
 # Todo
-1. Additional export to a file that keeps position, zindex, etc. Still in a human readable form
-1. Additional import of a file that restores position, zindex, etc
 1. Select several notes in a easy way, e.g. drag a rectangle with the mouse over the desired notes. or select with shift + click ...
 1. Change colors of notes (shall work on one note or on all selected notes)
 1. Extend work sureface on the left und top. At least the space of a note shall be available in all directions
