@@ -62,9 +62,14 @@ body {
 <script>
 var db = null;
 
+/* Create a database based on the current file name */
+var url = window.location.pathname;
+var filename = url.substring(url.lastIndexOf('/')+1);
+var database = filename.substring(0, filename.lastIndexOf('.')) 
+
 try {
     if (window.openDatabase) {
-        db = openDatabase("NoteTest", "1.0", "HTML5 Database API example", 200000);
+        db = openDatabase(database, "1.0", "HTML5 Database API example", 200000);
         if (!db)
             alert("Failed to open the database on disk.  This is probably because the version was bad or there is not enough space left in this domain's quota");
     } else
