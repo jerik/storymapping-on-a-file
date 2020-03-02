@@ -1,0 +1,66 @@
+[
+	{
+		"id": 53,
+		"note": "Halllo Du da",
+		"timestamp": 1583182293865,
+		"left": "139px",
+		"top": "147px",
+		"zindex": 128
+	},
+	{
+		"id": 54,
+		"note": "take coffee box",
+		"timestamp": 1582803266557,
+		"left": "872px",
+		"top": "143px",
+		"zindex": 122
+	},
+	{
+		"id": 55,
+		"note": "fill coffee into coffee machine",
+		"timestamp": 1582803266557,
+		"left": "387px",
+		"top": "381px",
+		"zindex": 126
+	},
+	{
+		"id": 56,
+		"note": "fill water into coffee machine",
+		"timestamp": 1582803266558,
+		"left": "1111px",
+		"top": "390px",
+		"zindex": 125
+	},
+	{
+		"id": 57,
+		"note": "start brewing process",
+		"timestamp": 1582803266559,
+		"left": "1103px",
+		"top": "142px",
+		"zindex": 123
+	},
+	{
+		"id": 58,
+		"note": "fill brewed coffee into your cup",
+		"timestamp": 1582803266560,
+		"left": "387px",
+		"top": "147px",
+		"zindex": 107
+	},
+	{
+		"id": 59,
+		"note": "enjoy coffee",
+		"timestamp": 1582803266560,
+		"left": "627px",
+		"top": "146px",
+		"zindex": 121
+	},
+	{
+		"id": 60,
+		"note": "This and that",
+		"timestamp": 1582803470529,
+		"left": "1343px",
+		"top": "141px",
+		"zindex": 124
+	}
+]

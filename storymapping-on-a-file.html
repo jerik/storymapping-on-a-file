@@ -434,6 +434,22 @@ function exportNotesAsTextfile()
     });
 }
 
+function exportJson()
+{
+	var stories_export = [];
+    db.transaction(function(tx) {
+        tx.executeSql("SELECT id, note, timestamp, left, top, zindex FROM WebKitStickyNotes", [], function(tx, result) {
+			for (var i = 0; i < result.rows.length; i++) {
+				stories_export.push(result.rows.item(i));
+			}
+			download('storymapping-export.json', JSON.stringify(stories_export, null, '\t'));
+        }, function(tx, error) {
+            alert('Failed to retrieve notes from database - ' + error.message);
+            return;
+        });
+    });
+}
+
 var openFile = function(event) {
 	  var input = event.target;
 
@@ -482,8 +498,9 @@ if (db != null)
 	<script>
 	document.getElementById("newNoteButton").disabled = !db;
 	</script>
-	<input type='file' accept='text/*' onchange='openFile(event)'><br>
-	<button id="fileExport" onclick="exportNotesAsTextfile()">Export</button>
+	<input type='file' accept='text/*,application/json' onchange='openFile(event)'><br>
+	<!-- button id="fileExport" onclick="exportNotesAsTextfile()">Export</button-->
+	<button id="fileExport" onclick="exportJson()">Export</button>
 </div>
 </body>
 </html>
