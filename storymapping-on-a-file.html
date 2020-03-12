@@ -58,6 +58,19 @@ body {
     padding: 2px 4px;
     text-align: right;
 }
+
+.jira {
+    position: absolute;
+    left: 100px;
+    right: 0px;
+    top: -15px;
+    font-size: 9px;
+    background-color: #c0c0c0;
+    color: white;
+    /** border-top: 1px solid #a80; **/
+    padding: 2px 4px;
+    text-align: right;
+}
 </style>
 <script>
 var db = null;
@@ -110,6 +123,20 @@ function Note()
     ts.addEventListener('mousedown', function(e) { return self.onMouseDown(e) }, false);
     note.appendChild(ts);
     this.lastModified = ts;
+
+	// WIP
+    var jiralink = document.createElement('a');
+	jiralink.href = "https://heise.de";
+    jiralink.addEventListener('mousedown', function(e) { return self.onMouseDown(e) }, false);
+	jiralink.textContent = "jira";
+    note.appendChild(jiralink);
+
+    var jira = document.createElement('div');
+    jira.className = 'jira';
+    jira.addEventListener('mousedown', function(e) { return self.onMouseDown(e) }, false);
+	jira.textContent = jiralink
+    note.appendChild(jira);
+	// End WIP
 
     document.body.appendChild(note);
     return this;
@@ -344,7 +371,7 @@ function loadNotes()
 
 function modifiedString(date)
 {
-    return 'Last Modified: ' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+	return 'Last Modified: ' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 }
 
 function newNote()
