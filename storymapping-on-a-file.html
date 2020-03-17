@@ -124,17 +124,20 @@ function Note()
     note.appendChild(ts);
     this.lastModified = ts;
 
-	// WIP
+	// WIP TODO
+	// see console.log when clicking into a note
     var jiralink = document.createElement('a');
+    jiralink.className = 'jiralink';
 	jiralink.href = "https://heise.de";
-    jiralink.addEventListener('mousedown', function(e) { return self.onMouseDown(e) }, false);
+    // jiralink.addEventListener('mousedown', function(e) { return self.onMouseDown(e) }, false);
 	jiralink.textContent = "jira";
-    note.appendChild(jiralink);
+    // note.appendChild(jiralink);
 
     var jira = document.createElement('div');
     jira.className = 'jira';
     jira.addEventListener('mousedown', function(e) { return self.onMouseDown(e) }, false);
-	jira.textContent = jiralink
+	// jira.textContent = jiralink
+	jira.appendChild(jiralink);
     note.appendChild(jira);
 	// End WIP
 
@@ -278,6 +281,9 @@ Note.prototype = {
 
     onMouseDown: function(e)
     {
+		// WIP TODO jiralink
+		console.log("onMouseDown: " + this.id );
+		console.log(this);
         captured = this;
         this.startX = e.clientX - this.note.offsetLeft;
         this.startY = e.clientY - this.note.offsetTop;
