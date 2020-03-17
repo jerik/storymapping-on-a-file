@@ -135,7 +135,7 @@ function Note()
 
     var jira = document.createElement('div');
     jira.className = 'jira';
-    jira.addEventListener('mousedown', function(e) { return self.onMouseDown(e) }, false);
+    /* jira.addEventListener('mousedown', function(e) { return self.onMouseDown(e) }, false); */
 	// jira.textContent = jiralink
 	jira.appendChild(jiralink);
     note.appendChild(jira);
@@ -216,6 +216,26 @@ Note.prototype = {
         this.note.style.zIndex = x;
     },
 
+    get backgroundColor()
+    {
+        return this.note.style.backgroundColor;
+    },
+
+    set backgroundColor(x)
+    {
+        this.note.style.backgroundColor = x;
+    },
+
+    get dataid()
+    {
+        return this.note.dataset.id;
+    },
+
+    set dataid(x)
+    {
+        this.note.dataset.id = x;
+    },
+
     close: function(event)
     {
         this.cancelPendingSave();
@@ -283,7 +303,9 @@ Note.prototype = {
     {
 		// WIP TODO jiralink
 		if (e.altKey == true) {
-			change_note(this.id)
+			console.log("altkey: " + e.altKey);
+			this.backgroundColor = '#c0c'; 
+			change_note(this.id); // seems not to be the right solution... But How do I choose different action without this... 
 			return false; 
 		}
         captured = this;
@@ -339,7 +361,7 @@ Note.prototype = {
 function loaded()
 {
     db.transaction(function(tx) {
-        tx.executeSql("SELECT COUNT(*) FROM WebkitStickyNotes", [], function(result) {
+        tx.executeSql("SELECT COUNT(*) FROM WebKitStickyNotes", [], function(result) {
             loadNotes();
         }, function(tx, error) {
             tx.executeSql("CREATE TABLE WebKitStickyNotes (id REAL UNIQUE, note TEXT, timestamp REAL, left TEXT, top TEXT, zindex REAL)", [], function(result) { 
@@ -357,6 +379,7 @@ function loadNotes()
                 var row = result.rows.item(i);
                 var note = new Note();
                 note.id = row['id'];
+				note.dataid = row['id']; // to get an element where I can select the div
                 note.text = row['note'];
                 note.timestamp = row['timestamp'];
                 note.left = row['left'];
@@ -378,20 +401,46 @@ function loadNotes()
     });
 }
 
+function load_one_note(id)
+{
+    db.transaction(function(tx) {
+        tx.executeSql("SELECT id, note, timestamp, left, top, zindex FROM WebKitStickyNotes WHERE id = ?", [id], function(tx, result) {
+			console.log(result.rows.item(0));
+            /* for (var i = 0; i < result.rows.length; ++i) { */
+                var row = result.rows.item(0);
+                var note = new Note();
+                note.id = row['id'];
+				note.dataid = row['id']; // to get an element where I can select the div
+                note.text = row['note'];
+                note.timestamp = row['timestamp'];
+                note.left = row['left'];
+                note.top = row['top'];
+                note.zIndex = row['zindex'];
+
+                if (row['id'] > highestId)
+                    highestId = row['id'];
+                if (row['zindex'] > highestZ)
+                    highestZ = row['zindex'];
+            /* } */
+				console.log(note);
+
+        }, function(tx, error) {
+            alert('Failed to retrieve notes from database - ' + error.message);
+            return;
+        });
+    });
+}
+
 function modifiedString(date)
 {
 	return 'Last Modified: ' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-}
-
-function change_note(key) {
-	console.log(this);
-	console.log("This is key: " + key);
 }
 
 function newNote()
 {
     var note = new Note();
     note.id = ++highestId;
+	note.dataid = note.id; // to get an element where I can select the div
     note.timestamp = new Date().getTime();
     note.left = Math.round(Math.random() * 400) + window.pageXOffset + 'px';
     /* note.top = Math.round(Math.random() * 500) + 'px'; */
@@ -400,8 +449,19 @@ function newNote()
     note.saveAsNew();
 }
 
+/* WIP TODO better to change directly, as I then have the note object. */ 
+/* Here I have a timing problem, as the load_one_note is not sync but async */
+function change_note(id) {
+	console.log("data-id: " + id);
+	/* current_note = load_one_note(id); */
+	/* console.log(current_note); */
+	/* var note = document.querySelector('[data-id="1"]'); */
+	/* note.style.backgroundColor = '#cc0'; */
+	/* console.log(note); */
+}
+
 function markup(message) {
-	return '<b>' + message + '</b>'
+	return '<b>' + message + '</b>';
 }
 
 function newNoteFromListItem(message) {
@@ -518,7 +578,7 @@ function which_import(source) {
 function cleared()
 {
     db.transaction(function(tx) {
-        tx.executeSql("DELETE FROM WebkitStickyNotes", [], function(result) {
+        tx.executeSql("DELETE FROM WebKitStickyNotes", [], function(result) {
             /* loadNotes(); */
         }, function(tx, error) {
             tx.executeSql("CREATE TABLE WebKitStickyNotes (id REAL UNIQUE, note TEXT, timestamp REAL, left TEXT, top TEXT, zindex REAL)", [], function(result) { 
