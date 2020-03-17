@@ -282,8 +282,10 @@ Note.prototype = {
     onMouseDown: function(e)
     {
 		// WIP TODO jiralink
-		console.log("onMouseDown: " + this.id );
-		console.log(this);
+		if (e.altKey == true) {
+			change_note(this.id)
+			return false; 
+		}
         captured = this;
         this.startX = e.clientX - this.note.offsetLeft;
         this.startY = e.clientY - this.note.offsetTop;
@@ -331,6 +333,7 @@ Note.prototype = {
         this.dirty = true;
         this.saveSoon();
     },
+
 }
 
 function loaded()
@@ -378,6 +381,11 @@ function loadNotes()
 function modifiedString(date)
 {
 	return 'Last Modified: ' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+}
+
+function change_note(key) {
+	console.log(this);
+	console.log("This is key: " + key);
 }
 
 function newNote()
@@ -522,7 +530,7 @@ function cleared()
 
 /* Keyboard shortcut to create new note with Key: Numpad ADD */
 document.addEventListener('keydown', function(event){
-	if (event.code == "NumpadAdd") { 
+	if (event.code == "F1") { 
 		newNote();
 	}
 } );
